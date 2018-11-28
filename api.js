@@ -33,6 +33,34 @@ app.get('/todo', (req, res) => {
     res.send(myList) //usually html
 })
 
+app.get('/todo/:id', (req, res) => {
+    const id = parseInt(req.params.id) //parseInt turns into integer
+    const item = myList.find(p => p.id === id)
+    if (!item) {
+        return res.status(404).send('List item not found')
+    }
+    return res.send(item)
+})
+
+app.post('/todo', (req, res) => {
+    // get params from req body
+    const object = req.body
+    const id = object.id
+    const title = object.title
+    const priority = object.priority
+    const body = object.body
+    // add to array
+    const item = {
+        id: id,
+        title: title,
+        priority: priority,
+        body: body
+    }
+    myList.push(item)
+    // send new poke as result
+    return res.send(item)
+})
+
 app.listen(5000, () => {
     console.log('listening on port 5000')
 })
