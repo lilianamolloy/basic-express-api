@@ -61,6 +61,38 @@ app.post('/todo', (req, res) => {
     return res.send(item)
 })
 
+app.put('/todo/:id', (req, res) => {
+    // check the array for pokemon
+    const id = parseInt(req.params.id) //parseInt turns into integer
+    const item = myList.find(p => p.id === id)
+    if (!item) {
+        return res.status(404).send('List item not found')
+    }
+    // update the record
+    const object = req.body
+    const title = object.title
+    const priority = object.priority
+    const body = object.body
+    item.title = title
+    item.priority = priority
+    item.body = body
+    // send back updated pokemon as response
+    return res.send(item)
+})
+
+app.delete('/todo/:id', (req, res) => {
+    // check the array for pokemon
+    const id = parseInt(req.params.id) //parseInt turns into integer
+    const item = myList.find(p => p.id === id)
+    if (!item) {
+        return res.status(404).send('List item not found')
+    }
+    const index = myList.indexOf(item)
+    myList.splice(index, 1)
+
+    return res.send(item)
+})
+
 app.listen(5000, () => {
     console.log('listening on port 5000')
 })
