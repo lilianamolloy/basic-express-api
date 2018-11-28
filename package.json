@@ -4,11 +4,15 @@
   "description": "A to do API",
   "main": "api.js",
   "scripts": {
+    "start": "nodemon api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "lili",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
   }
 }
